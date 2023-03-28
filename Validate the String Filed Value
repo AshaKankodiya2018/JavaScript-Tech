@@ -1,0 +1,68 @@
+
+
+function validateDate(executionContext) {
+
+    debugger;
+
+
+    if (executionContext != null) {
+        let datetimefield = Xrm.Page.getAttribute("ak_name").getValue();
+
+        if (datetimefield != null && datetimefield != undefined) {
+
+
+
+            if (!datetimefield.includes("AM") && !datetimefield.includes("am") && !datetimefield.includes("pm") && !datetimefield.includes("PM")) {
+
+
+                var saveEvent = executionContext.getEventArgs();
+                if (saveEvent != null) {
+
+                    let confirmbox = confirm("Time of Call Field is not in the following format HH:MM AM/PM");
+
+                    if (confirmbox = true) {
+                        Xrm.Page.getControl("ak_name").setFocus(true)
+                    }
+                    saveEvent.preventDefault();
+                }
+            }
+
+        }
+    }
+}
+
+
+function validateonLoad() {
+
+    let datetimefield = Xrm.Page.getAttribute("ak_name").getValue();
+
+    if (datetimefield != null && datetimefield != undefined) {
+
+        if (!datetimefield.includes("AM") && !datetimefield.includes("am") && !datetimefield.includes("pm") && !datetimefield.includes("PM")) {
+            // alert("vlid formate ...");
+            let confirmbox = confirm("Time of Call Field is not in the following format HH:MM AM/PM");
+
+            if (confirmbox = true) {
+                Xrm.Page.getControl("ak_name").setFocus(true)
+
+            }
+        }
+
+    }
+
+
+}
+    // var confirmStrings = {
+    //     text: "This is a confirmation.",
+    //     title: "Confirmation Dialog",
+    //     confirmButtonLabel: "Yes",
+    //     cancelButtonLabel: "No"
+    // };
+    // var confirmOptions = {
+    //     height: 200,
+    //     width: 450
+    // };
+    // Xrm.Navigation.openConfirmDialog(confirmStrings, confirmOptions).then(function(success) {
+    //     if (success.confirmed) console.log("Dialog closed using Yes button.");
+    //     else console.log("Dialog closed using No button or X.");
+    // });
